@@ -2,7 +2,7 @@ import { spawn } from 'child_process';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
- try {
+  try {
     const data = await req.json();
     const command = data.command;
     console.log(`Received command: ${command}`);
@@ -12,6 +12,11 @@ export async function POST(req: NextRequest) {
 
     let procData: string = '';
     let procError: string = '';
+
+    /**
+     * setting up event listeners before the writing to child process to intentionally. it's the correct way
+     * ~ Riki {@Github https://github.com/phukon}
+     */
 
     child.stdout.on('data', (output) => {
       procData += output.toString();
@@ -42,7 +47,9 @@ export async function POST(req: NextRequest) {
       await processClosed;
     } catch (error) {
       console.error(`Error from child process: ${error}`);
-      return new NextResponse(procError || 'Internal Server Error', { status: 500 });
+      return new NextResponse(procError || 'Internal Server Error', {
+        status: 500,
+      });
     }
 
     if (procError) {
@@ -51,8 +58,8 @@ export async function POST(req: NextRequest) {
     }
 
     return new NextResponse(procData, { status: 200 });
- } catch (error) {
+  } catch (error) {
     console.error(`Error processing command: ${(error as Error).message}`);
     return new NextResponse('Internal Server Error', { status: 500 });
- }
+  }
 }
