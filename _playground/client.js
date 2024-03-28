@@ -1,4 +1,4 @@
-const http = require('http');
+const https = require('https');
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -10,8 +10,7 @@ function sendCommand(command) {
   const commandObject = { command };
 
   const options = {
-    hostname: 'localhost',
-    port: 3000,
+    hostname: 'guava-next-nu.vercel.app',
     path: '/api',
     method: 'POST',
     headers: {
@@ -19,7 +18,7 @@ function sendCommand(command) {
     },
   };
 
-  const req = http.request(options, (res) => {
+  const req = https.request(options, (res) => {
     // console.log("yooo bishes", res)
     // res.on('data', (data) => {
     //   console.log(data.toString());
@@ -34,7 +33,7 @@ function sendCommand(command) {
     });
 
     res.on('end', () => {
-      console.log('Response data:', responseData);
+      console.log('Response data: \n \n%s', responseData);
       console.log('\n')
       promptForCommand(); 
     });
