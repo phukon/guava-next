@@ -1,5 +1,5 @@
 diff --git a/dist/server/lib/start-server.js b/dist/server/lib/start-server.js
-index c274e6e205f847fd5e393f819276e1af92b41d63..7c6589e6cd3c888647db077956b000dae5314654 100644
+index c274e6e205f847fd5e393f819276e1af92b41d63..1d3bbddccfe88b5c806866de6f5e875a7f0a54a1 100644
 --- a/dist/server/lib/start-server.js
 +++ b/dist/server/lib/start-server.js
 @@ -39,6 +39,17 @@ const _appinfolog = require("./app-info-log");

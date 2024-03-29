@@ -6,13 +6,13 @@ settings:
 
 patchedDependencies:
   next@14.1.4:
-    hash: bpa53ai64otywxkllvhhx35pte
+    hash: jnqj5jzr66xycyz74ls3eqkzvq
     path: patches/next@14.1.4.patch
 
 dependencies:
   next:
     specifier: 14.1.4
-    version: 14.1.4(patch_hash=bpa53ai64otywxkllvhhx35pte)(react-dom@18.2.0)(react@18.2.0)
+    version: 14.1.4(patch_hash=jnqj5jzr66xycyz74ls3eqkzvq)(react-dom@18.2.0)(react@18.2.0)
   pino-http:
     specifier: ^9.0.0
     version: 9.0.0
@@ -2079,7 +2079,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next@14.1.4(patch_hash=bpa53ai64otywxkllvhhx35pte)(react-dom@18.2.0)(react@18.2.0):
+  /next@14.1.4(patch_hash=jnqj5jzr66xycyz74ls3eqkzvq)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-1WTaXeSrUwlz/XcnhGTY7+8eiaFvdet5z9u3V2jb+Ek1vFo0VhHKSAIJvDWfQpttWjnyw14kBeq28TPq7bTeEQ==}
     engines: {node: '>=18.17.0'}
     hasBin: true
