@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img alt=" Interact with your Vercel deployment's build container through it's bash terminal." src="https://github.com/phukon/guava-next/assets/60285613/c860bcfa-49e2-41ce-86cb-d2b7373d2590">
 
-## Getting Started
+<h3 align="center">guava-term + Next.js</h3>
 
-First, run the development server:
+<p align="center">
+    Interact with your Vercel deployment's build container through it's bash terminal
+    <br />
+    <a href="#http-implementation"><strong>HTTP</strong></a> ·
+    <a href=""><strong>guava-term</strong></a> ·
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<br/>
+
+This project enables remote interaction with a Vercel Build container through it's bash terminal using child processes. I initially wrote this to explore the remote environment and use the `/temp` directory of a Vercel Build Docker container. {see more @ [Vercel Builds](https://vercel.com/docs/deployments/builds) }
+
+For a simple Node.js implementation with http, and webhook, check [guava-next](https://github.com/phukon/guava-term)
+
+## HTTP implementation
+
+Everything is stateless on the `HTTP` implementation. The `child process` is killed after every command or should I say for every new command, a new `child process` is spun up.
+
+### Extra feature
+- Patched the `/node_modules/next/dist/server/lib/start-server.js` to enable rich logging.
+- The logs are stored in your OS's temp dir.
+- Patches are defined in the `patches` dir of this repo. These are automatically applied after the install command. { `"postinstall": "patch-package"` @ `package.json`}
+
+### HTTP
+
+1.  `npm install`
+
+### Websocket
+
+Vercel currently doesn't support websockets, therefore I haven't added support for websockets in this Next.js app.
+{see Node.js guava-term websocket implementation @ [guava-term](https://github.com/phukon/guava-term?tab=readme-ov-file#websocket)}
+
+### Usage
+
+ Run the dev server: `npm run dev`
+
+#### Client Side
+
+1. Add hostname in the options in `client/client.js`
+2. Run the client: `node client.js` This will prompt you to enter a command.
+3. Enter the desired command and press Enter. The command will be sent to the server, executed in a bash terminal, and the output will be displayed in the client console.
+
+## The patch
+
+```javscript
+const os = require('os');
+const _logger = require("pino-http")({
+  transport: {
+    target: "pino/file",
+    options: {
+      destination: `${os.tmpdir()}`,
+      mkdir: true,
+      all: true,
+      translateTime: true,
+    },
+  },
+});
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+// used inside requestListener {@ node_modules/next/dist/server/lib/start-server.js}
+_logger(req, res);
+```

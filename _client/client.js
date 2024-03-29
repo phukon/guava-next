@@ -9,8 +9,13 @@ const rl = readline.createInterface({
 function sendCommand(command) {
   const commandObject = { command };
 
+  /**
+   * ⚠ Add the hostname only.
+   * Example abc.vercel.app excluding `https://`
+   */
+
   const options = {
-    hostname: 'guava-next-nu.vercel.app',
+    hostname: 'add-your-server-hostname',
     path: '/api',
     method: 'POST',
     headers: {

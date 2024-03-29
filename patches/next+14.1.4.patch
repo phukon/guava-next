@@ -1,16 +1,17 @@
-diff --git a/dist/server/lib/start-server.js b/dist/server/lib/start-server.js
-index c274e6e205f847fd5e393f819276e1af92b41d63..1d3bbddccfe88b5c806866de6f5e875a7f0a54a1 100644
---- a/dist/server/lib/start-server.js
-+++ b/dist/server/lib/start-server.js
-@@ -39,6 +39,17 @@ const _appinfolog = require("./app-info-log");
+diff --git a/node_modules/next/dist/server/lib/start-server.js b/node_modules/next/dist/server/lib/start-server.js
+index c274e6e..95b651d 100644
+--- a/node_modules/next/dist/server/lib/start-server.js
++++ b/node_modules/next/dist/server/lib/start-server.js
+@@ -39,6 +39,18 @@ const _appinfolog = require("./app-info-log");
  const _turbopackwarning = require("../../lib/turbopack-warning");
  const _trace = require("../../trace");
  const _ispostpone = require("./router-utils/is-postpone");
++const os = require('os');
 +const _logger = require("pino-http")({
 +  transport: {
 +    target: "pino/file",
 +    options: {
-+      destination: '/tmp/output/output.log',
++      destination: `${os.tmpdir()}`,
 +      mkdir: true,
 +      all: true,
 +      translateTime: true,
@@ -20,11 +21,11 @@ index c274e6e205f847fd5e393f819276e1af92b41d63..1d3bbddccfe88b5c806866de6f5e875a
  function _interop_require_default(obj) {
      return obj && obj.__esModule ? obj : {
          default: obj
-@@ -132,6 +143,7 @@ async function startServer(serverOptions) {
+@@ -132,6 +144,7 @@ async function startServer(serverOptions) {
          throw new Error("Using a self signed certificate is only supported with `next dev`.");
      }
      async function requestListener(req, res) {
-+        _logger(req, res);
++       _logger(req, res);
          try {
              if (handlersPromise) {
                  await handlersPromise;
