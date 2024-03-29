@@ -13,7 +13,7 @@
 
 This project enables remote interaction with a Vercel Build container through it's bash terminal using child processes. I initially wrote this to explore the remote environment and use the `/temp` directory of a Vercel Build Docker container. {see more @ [Vercel Builds](https://vercel.com/docs/deployments/builds) }
 
-For a simple Node.js implementation with http, and webhook, check [guava-next](https://github.com/phukon/guava-term)
+For a simple Node.js implementation with http, and webhook, check [guava-term](https://github.com/phukon/guava-term)
 
 ## HTTP implementation
 
