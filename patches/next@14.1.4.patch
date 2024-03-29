@@ -10,7 +10,7 @@ index c274e6e205f847fd5e393f819276e1af92b41d63..7c6589e6cd3c888647db077956b000da
 +  transport: {
 +    target: "pino/file",
 +    options: {
-+      destination: '/tmp/output.log',
++      destination: '/tmp/output/output.log',
 +      mkdir: true,
 +      all: true,
 +      translateTime: true,
